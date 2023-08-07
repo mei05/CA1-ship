@@ -1,0 +1,539 @@
+import bpy,os
+
+
+def laut():
+    bpy.ops.mesh.primitive_cube_add(location=(0,0,-0.5))
+    bpy.ops.transform.resize(value=(20,15,0.7))
+    realpath = os.path.expanduser('E:\MeiNanda_CA1/laut.jpg')
+    try:
+        img = bpy.data.images.load(realpath)
+    except:
+        raise NameError("Cannot load image %s" % realpath)
+    cTex = bpy.data.textures.new('ColorTex', type = 'IMAGE')
+    cTex.image = img
+    mat = bpy.data.materials.new('TexMat')
+    mtex = mat.texture_slots.add()
+    mtex.texture_coords = 'GLOBAL'
+    mtex.texture = cTex
+    plane = bpy.context.object
+    meshplane = plane.data
+    meshplane.materials.append(mat)
+    return
+
+def dermaga_bawah(z,gray):
+    bpy.ops.mesh.primitive_cube_add(location=(0,20,z))
+    bpy.ops.transform.resize(value=(20,5,0.7))
+    plane = bpy.context.object
+    meshplane = plane.data
+    meshplane.materials.append(gray)
+    return
+
+def dermaga_atas(gray):
+    bpy.ops.mesh.primitive_plane_add(location=(0,22.5,1.61))
+    bpy.ops.transform.resize(value=(20,2.5,0))
+    plane = bpy.context.object
+    meshplane = plane.data
+    meshplane.materials.append(gray)
+    return
+
+def crane_bawah(y,warna):
+    z=1.55
+    for a in range (2):
+        bpy.ops.mesh.primitive_cube_add(location=(-12,17.5+y,z))
+        bpy.ops.transform.resize(value=(3,0.2,0.2))
+        plane = bpy.context.object
+        meshplane = plane.data
+        meshplane.materials.append(warna)
+        z += 2
+    return
+
+def crane_atas(y,warna):
+    z=14.35
+    for a in range (2):
+        bpy.ops.mesh.primitive_cube_add(location=(-12,17.5+y,z))
+        bpy.ops.transform.resize(value=(3,0.2,0.2))
+        plane = bpy.context.object
+        meshplane = plane.data
+        meshplane.materials.append(warna)
+        z -= 2
+    return
+
+def crane_tiang(y,warna):
+    x=-2.8
+    for a in range (2):
+        bpy.ops.mesh.primitive_cube_add(location=(-12+x,17.5+y,7.55))
+        bpy.ops.transform.resize(value=(0.2,0.2,7))
+        plane = bpy.context.object
+        meshplane = plane.data
+        meshplane.materials.append(warna)
+        x += 6
+    return
+
+def crane_tiang_datar(y,warna):
+    x=-2.8
+    for a in range (2):
+        bpy.ops.mesh.primitive_cube_add(location=(-10.5+x,19.5+y,12.7))
+        bpy.ops.transform.resize(value=(0.2,15.5,0.2))
+        plane = bpy.context.object
+        meshplane = plane.data
+        meshplane.materials.append(warna)
+        x += 3
+    return
+
+def katrol(y,z,warna):
+    x=-2.8
+    for a in range (2):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=2000, radius=1.0, depth=0.5, end_fill_type='NGON', view_align=False, enter_editmode=False, rotation =(80.1,0,80.1), location=(-10.21+x,9.5+y,12.7+z))
+        bpy.ops.transform.resize(value=(0.7,0.1,0.1))
+        plane = bpy.context.object
+        meshplane = plane.data
+        meshplane.materials.append(warna)
+        x += 2.4
+    return
+
+def crane_atas_datar(y,warna):
+    for a in range (2):
+        bpy.ops.mesh.primitive_cube_add(location=(-11.8,5+y,12.7))
+        bpy.ops.transform.resize(value=(1.5,0.2,0.2))
+        plane = bpy.context.object
+        meshplane = plane.data
+        meshplane.materials.append(warna)
+        y += 4
+    return
+
+def box1(x,y):
+    z=2.2
+    for a in range (2):
+        bpy.ops.mesh.primitive_cube_add(location=(x,18+y,z))
+        bpy.ops.transform.resize(value=(2,0.7,0.7))
+        plane = bpy.context.object
+        meshplane = plane.data
+        putih = bpy.data.materials.new('putih')
+        putih.diffuse_color=(1,1,1)
+        merah = bpy.data.materials.new('merah')
+        merah.diffuse_color=(1,0,0) 
+        if(a<=0) :
+            meshplane.materials.append(merah)
+        else :
+            meshplane.materials.append(putih)
+        z += 0.02
+        y += 1.4
+    return
+    
+def box2(x,y):
+    z=3.6
+    for a in range (2):
+        bpy.ops.mesh.primitive_cube_add(location=(x,18+y,z))
+        bpy.ops.transform.resize(value=(2,0.7,0.7))
+        plane = bpy.context.object
+        meshplane = plane.data
+        putih = bpy.data.materials.new('putih')
+        putih.diffuse_color=(1,1,1)
+        merah = bpy.data.materials.new('merah')
+        merah.diffuse_color=(1,0,0) 
+        if(a<=0) :
+            meshplane.materials.append(putih)
+        else :
+            meshplane.materials.append(merah)
+        z += 0.02
+        y += 1.4
+    return
+
+def box3(x,y):
+    z=3.6
+    for a in range (2):
+        bpy.ops.mesh.primitive_cube_add(location=(x,18+y,z))
+        bpy.ops.transform.resize(value=(2.05,0.75,0.75))
+        plane = bpy.context.object
+        meshplane = plane.data
+        biru = bpy.data.materials.new('biru')
+        biru.diffuse_color=(0,0,1)
+        kuning = bpy.data.materials.new('kuning')
+        kuning.diffuse_color=(1,1,0) 
+        if(a<=0) :
+            meshplane.materials.append(biru)
+        else :
+            meshplane.materials.append(kuning)
+        z += 0.02
+        y += 1.4
+    return
+
+def box4(x,y):
+    z=5
+    for a in range (2):
+        bpy.ops.mesh.primitive_cube_add(location=(x,18+y,z))
+        bpy.ops.transform.resize(value=(2.05,0.75,0.75))
+        plane = bpy.context.object
+        meshplane = plane.data
+        biru = bpy.data.materials.new('biru')
+        biru.diffuse_color=(0,0,1)
+        kuning = bpy.data.materials.new('kuning')
+        kuning.diffuse_color=(1,1,0) 
+        if(a<=0) :
+            meshplane.materials.append(kuning)
+        else :
+            meshplane.materials.append(biru)
+        z += 0.02
+        y += 1.4
+    return
+
+def box5(x,y):
+    z=6.5
+    for a in range (3):
+        bpy.ops.mesh.primitive_cube_add(location=(0+x,7.1+y,z))
+        bpy.ops.transform.resize(value=(0.75,2.7,0.8))
+        plane = bpy.context.object
+        meshplane = plane.data
+        biru = bpy.data.materials.new('biru')
+        biru.diffuse_color=(0,0,1)
+        putih = bpy.data.materials.new('putih')
+        putih.diffuse_color=(1,1,1) 
+        abu = bpy.data.materials.new('abu')
+        abu.diffuse_color=(0.8,0.8,0.8) 
+        if(a<=0) :
+            meshplane.materials.append(putih)
+        elif (a==1):
+            meshplane.materials.append(biru)
+        else:
+            bpy.ops.transform.resize(value=(-0.65,-1.05,-0.65))
+            bpy.ops.transform.translate(value=(x+49.58,y-3.8,z-19.3))
+            meshplane.materials.append(abu)
+            
+        z += 3.2
+        y += 1
+        x -= 12.6
+    return
+
+def box6(x,y,warna):
+    for a in range (2):
+        bpy.ops.mesh.primitive_cube_add(location=(x,21+y,13.45))
+        bpy.ops.transform.resize(value=(2.05,0.65,0.55))
+        box = bpy.context.object
+        mesh = box.data
+        mesh.materials.append(warna)
+        y += 2
+        #animasi
+        if (a==0):
+            box.location.y = 25.5
+            box.keyframe_insert(data_path="location", frame=0.0)
+            box.location.y = 22.5
+            box.keyframe_insert(data_path="location", frame=100.0)
+            box.location.y = 19.5
+            box.keyframe_insert(data_path="location", frame=200.0)
+            box.location.y = 16.5
+            box.keyframe_insert(data_path="location", frame=300.0)
+    return
+
+def bodi(merah,putih):
+    n=0
+    z=0
+    for a in range(2):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=2000, radius=1.0, depth=0.5+n, end_fill_type='NGON', view_align=False, enter_editmode=False, location=(-1.5,7,0.6+z))
+        #mendeklarasikan objek dan mesh
+        ob = bpy.context.object
+        ob.name = 'CYLINDER'
+        mymesh = ob.data
+        #scaling objek
+        ob.scale=(14.972,4,1.472)
+        if (a==1):
+            mymesh.materials.append(putih)
+        else:
+            mymesh.materials.append(merah) 
+        n += 1    
+        z += 1.47
+
+def cerobong(merah,putih):
+    z=0
+    for a in range(2):
+        #3.5,7,6.76
+        bpy.ops.mesh.primitive_cylinder_add(vertices=2000, radius=1.0, depth=0.5, end_fill_type='NGON', view_align=False, enter_editmode=False, location=(3.5,7.1,7.27+z))
+        #mendeklarasikan objek dan mesh
+        ob = bpy.context.object
+        ob.name = 'CYLINDER'
+        mymesh = ob.data
+        #scaling objek
+        ob.scale=(1.5,0.6,2)
+        if (a==1):
+            mymesh.materials.append(putih)
+        else:
+            mymesh.materials.append(merah) 
+        z += 1
+        
+def atas_cerobong(warna):
+    bpy.ops.mesh.primitive_circle_add(vertices=2000, radius=1.0, fill_type='NGON', location=(3.5,7.1,8.78))
+    #mendeklarasikan objek dan mesh
+    ob = bpy.context.object
+    ob.name = 'corong'
+    mymesh = ob.data
+    #scaling objek
+    ob.scale=(1.45,0.55,0)
+    mymesh.materials.append(warna) 
+            
+def lantai(warna):
+    bpy.ops.mesh.primitive_circle_add(vertices=2000, radius=1.0, fill_type='NGON', location=(-1.5,7,3.22))
+    #mendeklarasikan objek dan mesh
+    ob = bpy.context.object
+    ob.name = 'LANTAI'
+    mymesh = ob.data
+    #scaling objek
+    ob.scale=(14.972,4,0)
+    mymesh.materials.append(warna) 
+    
+def ubin():
+    x=0
+    for a in range (3):
+        bpy.ops.mesh.primitive_plane_add(location=(-3.5+x,7,3.25))
+        bpy.ops.transform.resize(value=(1.5,1.5,0))
+        realpath = os.path.expanduser('E:\MeiNanda_CA1/metal.jpg')
+        try:
+            img = bpy.data.images.load(realpath)
+        except:
+            raise NameError("Cannot load image %s" % realpath)
+        cTex = bpy.data.textures.new('ColorTex', type = 'IMAGE')
+        cTex.image = img
+        mat = bpy.data.materials.new('TexMat')
+        mtex = mat.texture_slots.add()
+        mtex.texture_coords = 'UV'
+        mtex.texture = cTex
+        plane = bpy.context.object
+        meshplane = plane.data
+        meshplane.materials.append(mat)
+        x += -4.5
+    return
+
+def dek1(warna):
+    x=0
+    z=0
+    for a in range (2):
+        bpy.ops.mesh.primitive_cube_add(location=(3.5,7,3.25+z))
+        bpy.ops.transform.resize(value=(2.5+x,2.5,2.5+x))
+        plane = bpy.context.object
+        meshplane = plane.data
+        meshplane.materials.append(warna)
+        x += -0.5
+        z += 1.5
+    return
+
+def atap_dek():
+    bpy.ops.mesh.primitive_plane_add(location=(3.5,7,6.76))
+    bpy.ops.transform.resize(value=(2,2.5,2))
+    plane = bpy.context.object
+    meshplane = plane.data
+    abu = bpy.data.materials.new('abu')
+    abu.diffuse_color=(0.7,0.7,0.7)
+    meshplane.materials.append(abu)
+    return
+    
+def pinggir(dalam,luar):
+    x=0
+    for a in range(2):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=2000, radius=1.0, depth=0.75, end_fill_type='NOTHING', view_align=False, enter_editmode=False, location=(-1.5,7,3.5))
+        ob = bpy.context.object
+        ob.name = 'CYLINDER'
+        mymesh = ob.data
+        ob.scale=(14.972+x,4.01+x,2-x)
+        if(a==0):
+            mymesh.materials.append(luar) 
+        else :
+            mymesh.materials.append(dalam) 
+        x += -0.01
+    
+def lubang_bulat1(warna):
+    bpy.ops.mesh.primitive_cylinder_add(vertices=2000, radius=1.0, depth=0.5, end_fill_type='NGON', view_align=False, enter_editmode=False, location=(-15.5,5.6,3), rotation =(80.1,0,-116.89))
+    #mendeklarasikan objek dan mesh
+    ob = bpy.context.object
+    ob.name = 'CYLINDER'
+    mymesh = ob.data
+    #scaling objek
+    ob.scale=(0.3,0.3,0.3)
+    mymesh.materials.append(warna) 
+
+def ventilasi_bulat1(x,warna):
+    y = 0
+    for a in range(4):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=2000, radius=1.0, depth=0.5, end_fill_type='NGON', view_align=False, enter_editmode=False, location=(1+x,5.2+y,4.5), rotation =(80.1,0,80.1))
+        ob = bpy.context.object
+        ob.name = 'CYLINDER'
+        mymesh = ob.data
+        ob.scale=(0.2,0.2,0.2)
+        mymesh.materials.append(warna)
+        y += 1.2
+    return
+    
+def ventilasi_persegi1(x,z,warna):
+    y = 0
+    for a in range(4):
+        bpy.ops.mesh.primitive_cube_add(location=(1.2+x,5.15+y,5.3+z), rotation =(80.1,0,80.1))
+        ob = bpy.context.object
+        mymesh = ob.data
+        ob.scale=(0.3,0.3,0.3)
+        mymesh.materials.append(warna)
+        y += 1.25
+    return
+
+def ventilasi_bulat2(y,warna):
+    x = 0
+    for a in range(5):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=2000, radius=1.0, depth=0.5, end_fill_type='NGON', view_align=False, enter_editmode=False, location=(1.4+x,4+y,4.5), rotation =(0,80.1,80.1))
+        ob = bpy.context.object
+        ob.name = 'CYLINDER'
+        mymesh = ob.data
+        ob.scale=(0.2,0.2,0.2)
+        mymesh.materials.append(warna)
+        x += 1
+        if (a==2):
+            ob.scale=(1.2,0.5,0.2)
+            ob.location=(x+0.4,y+4,3.65)
+    return
+    
+def ventilasi_persegi2(y,warna):
+    x = 0
+    for a in range(5):
+        bpy.ops.mesh.primitive_cube_add(location=(1.4+x,4.15+y,5.3), rotation =(80.1,0,80.1))
+        ob = bpy.context.object
+        mymesh = ob.data
+        ob.scale=(0.3,0.3,0.3)
+        mymesh.materials.append(warna)
+        x += 1.05
+    return
+
+def ventilasi_persegi3(y,warna):
+    x = 0
+    for a in range(4):
+        bpy.ops.mesh.primitive_cube_add(location=(1.7+x,4.15+y,6.3), rotation =(80.1,0,80.1))
+        ob = bpy.context.object
+        mymesh = ob.data
+        ob.scale=(0.3,0.3,0.3)
+        mymesh.materials.append(warna)
+        x += 1.05
+    return
+
+##############
+def tali_miring1(x,y,z,n,a,warna):
+    bpy.ops.mesh.primitive_cylinder_add(vertices=2000, radius=1.0, depth=30*n, end_fill_type='NGON', view_align=False, enter_editmode=False, location=(x,y,z), rotation =(-6.67,0,0+a))
+    ob = bpy.context.object
+    ob.name = 'CYLINDER'
+    mymesh = ob.data
+    ob.scale=(0.01,0.01,0.01)
+    mymesh.materials.append(warna)
+    return
+
+def tali_miring2(x,y,z,n,warna):
+    bpy.ops.mesh.primitive_cylinder_add(vertices=2000, radius=1.0, depth=100*n, end_fill_type='NGON', view_align=False, enter_editmode=False, location=(x,y,z), rotation =(80.3055,0,0))
+    ob = bpy.context.object
+    ob.name = 'CYLINDER'
+    mymesh = ob.data
+    ob.scale=(0.01,0.01,0.01)
+    mymesh.materials.append(warna)
+    return
+
+def tali_miring3(x,y,z,n,warna):
+    bpy.ops.mesh.primitive_cylinder_add(vertices=2000, radius=1.0, depth=100*n, end_fill_type='NGON', view_align=False, enter_editmode=False, location=(x,y,z), rotation =(-80.25,0,0))
+    ob = bpy.context.object
+    ob.name = 'CYLINDER'
+    mymesh = ob.data
+    ob.scale=(0.01,0.01,0.01)
+    mymesh.materials.append(warna)
+    return
+
+def tali_datar(x,y,z,n,warna):
+    bpy.ops.mesh.primitive_cylinder_add(vertices=2000, radius=1.0, depth=100*n, end_fill_type='NGON', view_align=False, enter_editmode=False, location=(x,y,z), rotation =(80.1,0,0))
+    ob = bpy.context.object
+    ob.name = 'CYLINDER'
+    mymesh = ob.data
+    ob.scale=(0.01,0.01,0.01)
+    mymesh.materials.append(warna)
+    return
+
+def run():
+    coklat = bpy.data.materials.new('coklat')
+    coklat.diffuse_color=(0.7,0.2,0)
+    
+    merah = bpy.data.materials.new('merah')
+    merah.diffuse_color=(1,0,0) 
+    
+    dark = bpy.data.materials.new('dark')
+    dark.diffuse_color=(0.1,0.1,0.1)
+    
+    hitam = bpy.data.materials.new('hitam')
+    hitam.diffuse_color=(0,0,0)
+    
+    biru = bpy.data.materials.new('biru')
+    biru.diffuse_color=(0,0,1)
+    
+    putih = bpy.data.materials.new('putih')
+    putih.diffuse_color=(1,1,1)
+    
+    kuning = bpy.data.materials.new('kuning')
+    kuning.diffuse_color=(0.9,0.64,0)
+    
+    abu2 = bpy.data.materials.new('abu2')
+    abu2.diffuse_color=(0.3,0.3,0.3)
+    
+    abu_muda = bpy.data.materials.new('abu_muda')
+    abu_muda.diffuse_color=(0.9,0.9,0.9)
+    
+    bodi(merah,putih)
+    cerobong(merah,putih)
+    atas_cerobong(hitam)
+    lantai(abu_muda)
+    pinggir(abu2,putih)
+    lubang_bulat1(abu2)
+    ventilasi_bulat1(0,abu2)
+    ventilasi_bulat1(5,abu2)
+    ventilasi_persegi1(0,0,abu2)
+    ventilasi_persegi1(4.6,0,abu2)
+    ventilasi_persegi1(-1,1.5,dark)
+    ventilasi_persegi1(4.2,1,dark)
+    ventilasi_bulat2(0.5,abu2)
+    ventilasi_bulat2(5.5,abu2)
+    ventilasi_persegi2(0.55,abu2)
+    ventilasi_persegi2(5.1,abu2)
+    ventilasi_persegi3(0.55,abu2)
+    ventilasi_persegi3(5.2,abu2)
+    dermaga_bawah(-0.5,abu2)
+    dermaga_bawah(0.9, abu_muda)
+    dermaga_atas(abu2)
+    crane_bawah(0,kuning)
+    crane_bawah(6,kuning)
+    crane_atas(0,kuning)
+    crane_atas(6,kuning)
+    crane_atas_datar(29.3,kuning)
+    crane_atas_datar(2.7,kuning)
+    crane_tiang(0,kuning)
+    crane_tiang(6,kuning)
+    crane_tiang_datar(3.5,kuning)
+    katrol(-1,0,abu2)
+    katrol(8,1.9,abu2)
+    katrol(14,1.9,abu2)
+    katrol(28,0,abu2)
+    dek1(putih)
+    box6(-11.8,4,coklat)
+    tali_miring1(-12.8,8.2,11.6,9,120,hitam)
+    tali_miring1(-10.8,8.2,11.6,9,-120,hitam)
+    tali_miring2(-13.05,13,13.7,9.29,hitam)
+    tali_miring2(-10.65,13,13.7,9.29,hitam)
+    tali_datar(-10.6,20.5,14.6,6,hitam)
+    tali_datar(-13,20.5,14.6,6,hitam)
+    tali_miring3(-13.05,30.6,13.6,14.5,hitam)
+    tali_miring3(-10.65,30.6,13.6,14.5,hitam)
+
+run()
+laut()
+box1(13,0)
+box1(13,2.8)
+box1(17.2,0)
+box1(17.2,2.9)
+box2(13,0)
+box2(13,2.8)
+box2(17.2,0)
+box2(17.2,2.9)
+box3(13,1.4)
+box3(17.2,1.45)
+box4(13,1.4)
+box4(17.2,1.45)
+box5(0.8,-0.2)
+ubin()
+atap_dek()
+
+
